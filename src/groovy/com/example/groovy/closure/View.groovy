@@ -4,9 +4,7 @@ package com.example.groovy.closure
  * Created by admin on 2017/4/5.
  */
 class View {
-
     private Closure onClickListener
-
     Timer timer
 
     View() {
@@ -18,17 +16,14 @@ class View {
             }
         }, 0, 3000)
     }
-
     void setOnClickListener(Closure closure) {
         this.onClickListener = closure
     }
-
     private void perOnClick() {
         if (onClickListener != null) {
             onClickListener(this)
         }
     }
-
     @Override
     String toString() {
         return "this is view"

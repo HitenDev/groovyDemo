@@ -1,42 +1,53 @@
 package com.example.groovy
 
+import com.example.groovy.bean.Person
 import com.example.groovy.closure.Android
+import com.example.groovy.closure.View
 
 /**
  * Created by admin on 2017/4/5.
  */
 class Main {
-    static void main(String... args) {
-//        Person person = new Person(name: "lilei",age: 14)
-//        printf String.valueOf(person.mother)
-//        def properties = person.properties
-//        print(properties)
-//        View view = new View()
-//        view.setOnClickListener {
-//            def delegate = getDelegate()
-//            def owner = getOwner()
-//            def thisObject = getThisObject()
-//            println delegate
-//            println owner
-//            println thisObject
-//            println it.toString()
-        Android android = new Android()
-        android.defaultConfig {
-            doSmt("我是闭包")
-            versionCode 100
-            versionName "final_6.0"
-            def delegate = getDelegate()
-            def owner = getOwner()
-            def thisObject = getThisObject()
-            println delegate
-            println owner
-            println thisObject
-        }
-        println android.toString()
+    void eat(String food) {
+        println "我根本不会吃，不要喂我${food}"
+    }
+    def cc = {
+        name = "hanmeimei"
+        age = 26
+        eat("油条")
     }
 
-    private static void doSmt(String str) {
-        println "Main object ${str}"
+    static void main(String... args) {
+        Main main = new Main()
+        Person person = new Person(name: "lilei", age: 14)
+        println person.toString()
+
+        main.cc.delegate = person
+//        main.cc.setResolveStrategy(Closure.DELEGATE_FIRST)
+        main.cc.setResolveStrategy(Closure.OWNER_FIRST)
+        main.cc.call()
+        println person.toString()
+
+
+        View view = new View()
+        view.setOnClickListener { View v ->
+            println v.toString()
+        }
+        Android bean = new Android()
+        def android = {
+            compileSdkVersion 25
+            buildToolsVersion "25.0.2"
+            defaultConfig {
+                minSdkVersion 15
+                targetSdkVersion 25
+                versionCode 1
+                versionName "1.0"
+            }
+        }
+        android.delegate = bean
+        android.call()
+        println bean.toString()
+
     }
 }
 

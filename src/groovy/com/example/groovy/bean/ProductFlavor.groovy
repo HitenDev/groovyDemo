@@ -6,6 +6,8 @@ package com.example.groovy.bean
 class ProductFlavor {
     private int mVersionCode
     private String mVersionName
+    private int mMinSdkVersion
+    private int mTargetSdkVersion
 
     def versionCode(int versionCode) {
         mVersionCode = versionCode
@@ -15,8 +17,13 @@ class ProductFlavor {
         mVersionName = versionName
     }
 
-    private void doSmt(String str) {
-        println "ProductFlavor object ${str}"
+    def minSdkVersion(int minSdkVersion) {
+        mMinSdkVersion = minSdkVersion
+    }
+
+
+    def targetSdkVersion(int targetSdkVersion) {
+        mTargetSdkVersion = targetSdkVersion
     }
 
 
@@ -25,6 +32,8 @@ class ProductFlavor {
         return "ProductFlavor{" +
                 "mVersionCode=" + mVersionCode +
                 ", mVersionName='" + mVersionName + '\'' +
+                ", mMinSdkVersion=" + mMinSdkVersion +
+                ", mTargetSdkVersion=" + mTargetSdkVersion +
                 '}'
     }
 }
